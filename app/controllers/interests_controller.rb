@@ -1,5 +1,6 @@
 class InterestsController < ApplicationController
   before_action :set_current_user_interest, only: [:edit, :update, :destroy]
+  before_action :login_check, only: [:new, :edit, :update, :destroy]
 
   # GET /interests
   # GET /interests.json
@@ -10,7 +11,7 @@ class InterestsController < ApplicationController
   # GET /interests/1
   # GET /interests/1.json
   def show
-    @interest = Interest.find(params[:id])
+    @interest = Interest.includes(:user).find(params[:id])
   end
 
   # GET /interests/new
@@ -63,6 +64,13 @@ class InterestsController < ApplicationController
   end
 
   private
+    def login_check
+      unless user_signed_in?
+        flash[:alert] = "ログインしてください"
+        redirect_to root_path
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_current_user_interest
       @interest = current_user.interests.find(params[:id])
