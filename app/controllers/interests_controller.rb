@@ -12,6 +12,8 @@ class InterestsController < ApplicationController
   # GET /interests/1.json
   def show
     @interest = Interest.includes(:user).find(params[:id])
+    @comments = @interest.comments.includes(:user).all
+    @comment  = @interest.comments.build(user_id: current_user.id) if current_user
   end
 
   # GET /interests/new
