@@ -1,5 +1,5 @@
 class InterestsController < ApplicationController
-  before_action :set_interest, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_user_interest, only: [:edit, :update, :destroy]
 
   # GET /interests
   # GET /interests.json
@@ -10,11 +10,12 @@ class InterestsController < ApplicationController
   # GET /interests/1
   # GET /interests/1.json
   def show
+    @interest = Interest.find(params[:id])
   end
 
   # GET /interests/new
   def new
-    @interest = Interest.new
+    @interest = current_user.interests.build
   end
 
   # GET /interests/1/edit
@@ -63,12 +64,12 @@ class InterestsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_interest
-      @interest = Interest.find(params[:id])
+    def set_current_user_interest
+      @interest = current_user.interests.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interest_params
-      params.require(:interest).permit(:title)
+      params.require(:interest).permit(:title, :user_id)
     end
 end
