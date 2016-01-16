@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,10 +14,23 @@
     <% @interests.each do |interest| %>
       <tr>
         <td><%= interest.title %></td>
+        <td><%= interest.user.user_name %></td>
+
         <td><%= link_to 'Show', interest %></td>
+        <% if user_signed_in? && interest.user == current_user %>
         <td><%= link_to 'Edit', edit_interest_path(interest) %></td>
         <td><%= link_to 'Destroy', interest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
+
+      <%- if false -%>
+            <% interest.comments.each do |comment| %>
+            <tr>
+              <td><%= comment.body %></td>
+            </tr>
+            <% end %>
+      <%- end -%>
+
     <% end %>
   </tbody>
 </table>

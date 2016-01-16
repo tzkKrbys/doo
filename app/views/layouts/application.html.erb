@@ -7,8 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="logo">
+    <%= link_to 'doo!',root_path %>
+  </div>
   <% if user_signed_in? %>
-    <%= image_tag current_user.avatar_url %>
+    <div>
+      <%= image_tag current_user.avatar_url %>
+    </div>
     <%= current_user.user_name %>
     <%= link_to 'logout', destroy_user_session_path, method: :delete %>
   <% else %>
