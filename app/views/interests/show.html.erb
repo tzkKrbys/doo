@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<p class="interestTitle">
   <strong>やりたい事:</strong>
   <%= @interest.title %>
 </p>
@@ -10,12 +10,12 @@
   <%= link_to 'Back', interests_path %>
 <% end %>
 
-<div>
+<div class="commentsArea">
   <div>このやりたい事に対するコメント</div>
   <% @comments.each do |comment| %>
-    <div>
+    <div class="comment">
       <strong><%= comment.user.user_name %></strong>
-      <br /
+      <br />
       <p>
         <%= comment.body %>
         <% if user_signed_in? && comment.user == current_user %>
