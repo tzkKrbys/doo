@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
+  resources :empathies
+  resources :tags
   resources :comments
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: redirect('/interests')
 
-  resources :interests
+  # resources :interests
+  resources :interests do
+    resources :empathies, only: [:create, :destroy]
+  end
+
+  post 'empathize/:interest_id' => 'empathies#empathize', as: 'empathize'
+  delete 'unempathize/:interest_id' => 'empathies#unempathize', as: 'unempathize'
+  #
+  # delete 'unempathy/:interest_id' => 'empathies#destroy', as: 'unempathy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

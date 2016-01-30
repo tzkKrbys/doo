@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Interest:</strong>
+  <%= @empathy.interest_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @empathy.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_empathy_path(@empathy) %> |
+<%= link_to 'Back', empathies_path %>

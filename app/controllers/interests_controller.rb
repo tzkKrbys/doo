@@ -11,9 +11,14 @@ class InterestsController < ApplicationController
   # GET /interests/1
   # GET /interests/1.json
   def show
-    @interest = Interest.includes(:user).find(params[:id])
+    # @interest = Interest.includes(:user).includes(:empathy).find(params[:id])
+    @interest = Interest.includes(:user, :tags, :empathies).find(params[:id])
+
+    # @interest = Interest.includes(:empathy).find(params[:id])
     @comments = @interest.comments.includes(:user).all
     @comment  = @interest.comments.build(user_id: current_user.id) if current_user
+    @empathies = Empathy.where(interest_id: params[:id])
+    # binding.pry
   end
 
   # GET /interests/new

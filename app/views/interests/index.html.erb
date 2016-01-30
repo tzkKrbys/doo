@@ -1,6 +1,8 @@
+
 <%- if false -%>
 <h1>Listing Interests</h1>
 <% end %>
+<h2>最近投稿されたやりたいこと</h2>
 <table>
   <thead>
     <tr>
@@ -16,10 +18,10 @@
         <td><%= interest.title %></td>
         <td><%= interest.user.user_name %></td>
 
-        <td><%= link_to 'Show', interest %></td>
+        <td class='btn'><%= link_to '詳細を見る', interest %></td>
         <% if user_signed_in? && interest.user == current_user %>
-        <td><%= link_to 'Edit', edit_interest_path(interest) %></td>
-        <td><%= link_to 'Destroy', interest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class='btn'><%= link_to '編集する', edit_interest_path(interest) %></td>
+        <td class='btn'><%= link_to '削除する', interest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
 
@@ -38,5 +40,5 @@
 <br>
 
 <% if user_signed_in? %>
-  <p><%= link_to 'New Interest', new_interest_path %></p>
+  <p><%= link_to '新規投稿', new_interest_path %></p>
 <% end %>
