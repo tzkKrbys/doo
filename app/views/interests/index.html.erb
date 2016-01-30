@@ -15,8 +15,8 @@
   <tbody>
     <% @interests.each do |interest| %>
       <tr>
-        <td><%= interest.title %></td>
-        <td><%= interest.user.user_name %></td>
+        <td><%= link_to interest.title, interest %></td>
+        <td><%= link_to interest.user.user_name, user_path(interest.user_id) %></td>
 
         <td class='btn'><%= link_to '詳細を見る', interest %></td>
         <% if user_signed_in? && interest.user == current_user %>
