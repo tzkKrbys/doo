@@ -13,6 +13,7 @@
   <thead>
     <tr>
       <th>やりたい事</th>
+      <th>やりたい度</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
     <% @user.interests.each do |interest| %>
       <tr>
         <td><%= link_to interest.title, interest %></td>
+        <td><%= interest.passion %></td>
 
         <% if user_signed_in? && @user == current_user %>
         <td class='btn'><%= link_to '編集する', edit_interest_path(interest) %></td>
