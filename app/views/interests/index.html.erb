@@ -8,6 +8,7 @@
     <tr>
       <th>やりたい事</th>
       <th>これをやりたい人</th>
+      <th>やりたい度</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
       <tr>
         <td><%= link_to interest.title, interest %></td>
         <td><%= link_to interest.user.user_name, user_path(interest.user_id) %></td>
+        <td><%= interest.passion %></td>
 
         <td class='btn'><%= link_to '詳細を見る', interest %></td>
         <% if user_signed_in? && interest.user == current_user %>

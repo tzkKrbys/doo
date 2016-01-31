@@ -18,6 +18,7 @@ class InterestsController < ApplicationController
     @comments = @interest.comments.includes(:user).all
     @comment  = @interest.comments.build(user_id: current_user.id) if current_user
     @empathies = Empathy.where(interest_id: params[:id])
+
   end
 
   # GET /interests/new
@@ -85,6 +86,6 @@ class InterestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interest_params
-      params.require(:interest).permit(:title, :user_id)
+      params.require(:interest).permit(:title, :user_id, :passion)
     end
 end
