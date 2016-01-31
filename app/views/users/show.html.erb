@@ -1,6 +1,41 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @user.user_name %>
+  <strong><%= @user.user_name %>さん</strong>
 </p>
+<p>
+  <strong>生年月日：<%= @user.birthday %></strong>
+</p>
+<%= link_to 'プロフィールを編集する', edit_user_path(@user.id) %>
+
+<h2><%= @user.user_name %>さんのやりたいこと一覧</h2>
+<table>
+  <thead>
+    <tr>
+      <th>やりたい事</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.interests.each do |interest| %>
+      <tr>
+        <td><%= link_to interest.title, interest %></td>
+
+        <% if user_signed_in? && @user == current_user %>
+        <td class='btn'><%= link_to '編集する', edit_interest_path(interest) %></td>
+        <td class='btn'><%= link_to '削除する', interest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+
+      <%- if false -%>
+            <% interest.comments.each do |comment| %>
+            <tr>
+              <td><%= comment.body %></td>
+            </tr>
+            <% end %>
+      <%- end -%>
+
+    <% end %>
+  </tbody>
+</table>

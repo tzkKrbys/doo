@@ -25,7 +25,6 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
-    # binding.pry
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment.interest, notice: 'Commentしました.' }

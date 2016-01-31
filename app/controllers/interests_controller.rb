@@ -18,7 +18,6 @@ class InterestsController < ApplicationController
     @comments = @interest.comments.includes(:user).all
     @comment  = @interest.comments.build(user_id: current_user.id) if current_user
     @empathies = Empathy.where(interest_id: params[:id])
-    # binding.pry
   end
 
   # GET /interests/new
@@ -37,7 +36,8 @@ class InterestsController < ApplicationController
 
     respond_to do |format|
       if @interest.save
-        format.html { redirect_to @interest, notice: 'Interest was successfully created.' }
+        # format.html { redirect_to @interest, notice: 'Interest was successfully created.' }
+        format.html { redirect_to :action => 'index', notice: 'Interest was successfully created.' }
         format.json { render :show, status: :created, location: @interest }
       else
         format.html { render :new }

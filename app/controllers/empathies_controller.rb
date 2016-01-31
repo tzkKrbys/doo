@@ -27,12 +27,9 @@ class EmpathiesController < ApplicationController
     # @empathy = Empathy.new(empathy_params)
     @empathy = Empathy.new(user_id: current_user.id, interest_id: params[:interest_id])
 
-    # binding.pry
     # @empathy = Empathy.create(user_id: current_user.id, interest_id: params[:interest_id])
     # @empathies = Empathy.where(interest_id: params[:interest_id])
-    # binding.pry
     # @interest = Interest.where(interest_id: params[:interest_id])
-    # binding.pry
 
     respond_to do |format|
       if @empathy.save
@@ -48,7 +45,6 @@ class EmpathiesController < ApplicationController
 
   def empathize
     interest = Interest.find(params[:interest_id])
-    # binding.pry
     empathy = current_user.empathies.build(interest_id: interest.id)
     empathy.save
     redirect_to interest
@@ -56,7 +52,6 @@ class EmpathiesController < ApplicationController
 
   def unempathize
     interest = Interest.find(params[:interest_id])
-    # binding.pry
     empathy = current_user.empathies.find_by(interest_id: interest.id)
     empathy.destroy
     redirect_to interest

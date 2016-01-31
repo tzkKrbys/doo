@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<p class="">
+  <p class="">やりたい人</p>
+  <h3 class=""><%= link_to @interest.user.user_name, user_path(@interest.user.id) %></h3>
+</p>
 <p class="interestTitle">
   <h2 class="yaritaikoto">やりたい事</h2>
   <p class="title"><%= @interest.title %></p>
@@ -10,7 +14,6 @@
   <%= link_to '編集する', edit_interest_path(@interest) %> |
   <%= link_to '戻る', interests_path %>
 <% end %>
-<%# binding.pry %>
 
 <% if user_signed_in? && @interest.user != current_user %>
   <% if current_user.empathies.find_by(interest_id: @interest.id) %>
@@ -24,12 +27,12 @@
   <div>このやりたい事に対するコメント</div>
   <% @comments.each do |comment| %>
     <div class="comment">
-      <strong><%= comment.user.user_name %></strong>
+      <strong><%= link_to comment.user.user_name, comment.user %></strong>
       <br />
       <p>
         <%= comment.body %>
         <% if user_signed_in? && comment.user == current_user %>
-        <%= link_to 'Delete', comment_path(comment), method: :delete %>
+        <%= link_to '削除', comment_path(comment), method: :delete %>
       </p>
       <% end %>
     </div>
