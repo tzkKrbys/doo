@@ -1,13 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p class="interestTitle">
-  <strong>やりたい事:</strong>
-  <%= @interest.title %>
+  <h2 class="yaritaikoto">やりたい事</h2>
+  <p class="title"><%= @interest.title %></p>
 </p>
+<%#= link_to 'me too!', interest_empathies_path %>
 
 <% if user_signed_in? && @interest.user == current_user %>
-  <%= link_to 'Edit', edit_interest_path(@interest) %> |
-  <%= link_to 'Back', interests_path %>
+  <%= link_to '編集する', edit_interest_path(@interest) %> |
+  <%= link_to '戻る', interests_path %>
+<% end %>
+<%# binding.pry %>
+
+<% if user_signed_in? && @interest.user != current_user %>
+  <% if current_user.empathies.find_by(interest_id: @interest.id) %>
+    <%= link_to '私も！を取消す', unempathize_path(@interest.id), method: :delete, class: "meTooBtn unempathy" %>
+  <% else %>
+    <%= link_to '私も！', empathize_path(@interest.id), method: :post, class: "meTooBtn empathy" %>
+  <% end %>
 <% end %>
 
 <div class="commentsArea">
