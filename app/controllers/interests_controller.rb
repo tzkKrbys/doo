@@ -6,6 +6,7 @@ class InterestsController < ApplicationController
   # GET /interests.json
   def index
     @interests = Interest.includes(:user).includes(:comments).all
+    @interest = Interest.includes(:user).includes(:comments).find(1)
   end
 
   # GET /interests/1
@@ -18,7 +19,6 @@ class InterestsController < ApplicationController
     @comments = @interest.comments.includes(:user).all
     @comment  = @interest.comments.build(user_id: current_user.id) if current_user
     @empathies = Empathy.where(interest_id: params[:id])
-
   end
 
   # GET /interests/new
